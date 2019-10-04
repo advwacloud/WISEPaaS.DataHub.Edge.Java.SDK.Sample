@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        final EdgeAgent _edgeAgent = new EdgeAgent(null, agentListener);
+        EdgeAgentOptions options = new EdgeAgentOptions();
+        options.AndroidPackageName = getPackageName();
+        final EdgeAgent _edgeAgent = new EdgeAgent(options, agentListener);
 
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     options.ConnectType = ConnectType.DCCS;
                     options.DCCS.CredentialKey = dccsKeyInput.getText().toString();
                     options.DCCS.APIUrl = dccsUrlInput.getText().toString();
+                    options.AndroidPackageName = getPackageName();
 
                     _edgeAgent.Options = options;
                     doConnect(_edgeAgent);
