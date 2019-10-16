@@ -2,6 +2,7 @@ package wisepaas.scada.scadasdksample;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 
 import wisepaas.scada.java.sdk.EdgeAgent;
@@ -261,7 +262,7 @@ class EdgeActions {
 
                 deviceStatus.DeviceList.add(device);
             }
-            deviceStatus.Timestamp = Instant.now();
+            deviceStatus.Timestamp = new Date();
 
             agent.SendDeviceStatus(deviceStatus);
         } catch (Exception e) {

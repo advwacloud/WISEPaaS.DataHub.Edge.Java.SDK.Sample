@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -65,7 +66,7 @@ import wisepaas.scada.java.sdk.model.edge.EdgeData;
                 data.TagList.add(tTag);
             }
         }
-        data.Timestamp = Instant.now();
+        data.Timestamp = new Date();
         return data;
     }
 
