@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WISE-PaaS/NODE Simulator</string>
+    <string name="app_name">WISE-PaaS/DataHub Simulator</string>
     <string name="node_id_lable">NODE ID</string>
     <string name="dccs_key">Credential Key</string>
     <string name="api_url">APU Url</string>
