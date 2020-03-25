@@ -1,4 +1,4 @@
-package wisepaas.scada.scadasdksample;
+package wisepaas.datahub.edgesdksample;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("wisepaas.scada.scadasdksample", appContext.getPackageName());
+        assertEquals("wisepaas.datahub.edgesdksample", appContext.getPackageName());
     }
 }

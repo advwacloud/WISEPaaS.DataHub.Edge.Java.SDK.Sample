@@ -1,4 +1,4 @@
-package wisepaas.scada.scadasdksample;
+package wisepaas.datahub.edgesdksample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,28 +11,28 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import wisepaas.scada.java.sdk.EdgeAgent;
-import wisepaas.scada.java.sdk.common.Const;
-import wisepaas.scada.java.sdk.common.EdgeAgentListener;
-import wisepaas.scada.java.sdk.common.Enum.ConnectType;
+import wisepaas.datahub.java.sdk.EdgeAgent;
+import wisepaas.datahub.java.sdk.common.Const;
+import wisepaas.datahub.java.sdk.common.EdgeAgentListener;
+import wisepaas.datahub.java.sdk.common.Enum.ConnectType;
 
-import wisepaas.scada.java.sdk.model.edge.ConfigAck;
-import wisepaas.scada.java.sdk.model.edge.EdgeAgentOptions;
-import wisepaas.scada.java.sdk.model.edge.TimeSyncCommand;
-import wisepaas.scada.java.sdk.model.edge.WriteValueCommand;
-import wisepaas.scada.java.sdk.model.event.DisconnectedEventArgs;
-import wisepaas.scada.java.sdk.model.event.EdgeAgentConnectedEventArgs;
-import wisepaas.scada.java.sdk.model.event.MessageReceivedEventArgs;
+import wisepaas.datahub.java.sdk.model.edge.ConfigAck;
+import wisepaas.datahub.java.sdk.model.edge.EdgeAgentOptions;
+import wisepaas.datahub.java.sdk.model.edge.TimeSyncCommand;
+import wisepaas.datahub.java.sdk.model.edge.WriteValueCommand;
+import wisepaas.datahub.java.sdk.model.event.DisconnectedEventArgs;
+import wisepaas.datahub.java.sdk.model.event.EdgeAgentConnectedEventArgs;
+import wisepaas.datahub.java.sdk.model.event.MessageReceivedEventArgs;
 
-import static wisepaas.scada.scadasdksample.EdgeActions.doConnect;
-import static wisepaas.scada.scadasdksample.EdgeActions.doDeleteAllCfg;
-import static wisepaas.scada.scadasdksample.EdgeActions.doDeleteDevices;
-import static wisepaas.scada.scadasdksample.EdgeActions.doDeleteTags;
-import static wisepaas.scada.scadasdksample.EdgeActions.doDisconnect;
-import static wisepaas.scada.scadasdksample.EdgeActions.doSendDataLoop;
-import static wisepaas.scada.scadasdksample.EdgeActions.doUpdateCfg;
-import static wisepaas.scada.scadasdksample.EdgeActions.doUpdateDeviceStatus;
-import static wisepaas.scada.scadasdksample.EdgeActions.doUploadCfg;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doConnect;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doDeleteAllCfg;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doDeleteDevices;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doDeleteTags;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doDisconnect;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doSendDataLoop;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doUpdateCfg;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doUpdateDeviceStatus;
+import static wisepaas.datahub.edgesdksample.EdgeActions.doUploadCfg;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         final CheckBox useSecureBox = findViewById(R.id.useSecure);
 
-        final EditText scadaIdInput = findViewById(R.id.scadaIdInput);
+        final EditText nodeIdInput = findViewById(R.id.nodeIdInput);
         final EditText dccsKeyInput = findViewById(R.id.dccsKeyInput);
         final EditText dccsUrlInput = findViewById(R.id.dccsUrlInput);
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     EdgeAgentOptions options = new EdgeAgentOptions();
-                    options.ScadaId = scadaIdInput.getText().toString();
+                    options.NodeId = nodeIdInput.getText().toString();
                     options.UseSecure = useSecureBox.isChecked();
                     options.ConnectType = ConnectType.DCCS;
                     options.DCCS.CredentialKey = dccsKeyInput.getText().toString();

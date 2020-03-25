@@ -1,17 +1,13 @@
-package wisepaas.scada.scadasdksample;
+package wisepaas.datahub.edgesdksample;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 
-import wisepaas.scada.java.sdk.EdgeAgent;
-import wisepaas.scada.java.sdk.common.Const;
-import wisepaas.scada.java.sdk.model.edge.EdgeConfig;
-import wisepaas.scada.java.sdk.model.edge.EdgeDeviceStatus;
-
-import static wisepaas.scada.scadasdksample.EdgeHelpers.dataLoopTask;
-import static wisepaas.scada.scadasdksample.EdgeHelpers.dataLoopTimer;
-import static wisepaas.scada.scadasdksample.EdgeHelpers.sendLoopInterval;
+import wisepaas.datahub.java.sdk.EdgeAgent;
+import wisepaas.datahub.java.sdk.common.Const;
+import wisepaas.datahub.java.sdk.model.edge.EdgeConfig;
+import wisepaas.datahub.java.sdk.model.edge.EdgeDeviceStatus;
 
 
 class EdgeActions {
@@ -32,12 +28,9 @@ class EdgeActions {
             int DTagCount = 5;
             int TTagCount = 5;
 
-            config.Scada = new EdgeConfig.ScadaConfig();
-            {
-                config.Scada.Name = "TEST_SCADA";
-                config.Scada.Description = "JAVA SDK TEST";
-            }
-            config.Scada.DeviceList = new ArrayList<>();
+            config.Node = new EdgeConfig.NodeConfig();
+
+            config.Node.DeviceList = new ArrayList<>();
 
             for (int i = 1; i <= deviceCount; i++) {
                 EdgeConfig.DeviceConfig device = new EdgeConfig.DeviceConfig();
@@ -64,14 +57,7 @@ class EdgeActions {
                         analogTag.EngineerUnit = "";
                         analogTag.IntegerDisplayFormat = 4;
                         analogTag.FractionDisplayFormat = 2;
-                        analogTag.HHPriority = 0;
-                        analogTag.HHAlarmLimit = 0.0;
-                        analogTag.HighPriority = 0;
-                        analogTag.HighAlarmLimit = 0.0;
-                        analogTag.LowPriority = 0;
-                        analogTag.LowAlarmLimit = 0.0;
-                        analogTag.LLPriority = 0;
-                        analogTag.LLAlarmLimit = 0.0;
+
                     }
                     device.AnalogTagList.add(analogTag);
                 }
@@ -91,14 +77,7 @@ class EdgeActions {
                         discreteTag.State5 = "";
                         discreteTag.State6 = "";
                         discreteTag.State7 = "";
-                        discreteTag.State0AlarmPriority = 0;
-                        discreteTag.State1AlarmPriority = 0;
-                        discreteTag.State2AlarmPriority = 0;
-                        discreteTag.State3AlarmPriority = 0;
-                        discreteTag.State4AlarmPriority = 0;
-                        discreteTag.State5AlarmPriority = 0;
-                        discreteTag.State6AlarmPriority = 0;
-                        discreteTag.State7AlarmPriority = 0;
+
                     }
                     device.DiscreteTagList.add(discreteTag);
 
@@ -111,12 +90,11 @@ class EdgeActions {
                         textTag.Description = "TTag " + j;
                         textTag.ReadOnly = false;
                         textTag.ArraySize = 0;
-                        textTag.AlarmStatus = false;
                     }
                     device.TextTagList.add(textTag);
                 }
 
-                config.Scada.DeviceList.add(device);
+                config.Node.DeviceList.add(device);
             }
 
             agent.UploadConfig(Const.ActionType.Create, config);
@@ -127,9 +105,9 @@ class EdgeActions {
 
     static void doDisconnect(EdgeAgent agent) {
         try {
-            if (dataLoopTimer != null) {
-                dataLoopTimer.cancel();
-                dataLoopTimer = null;
+            if (EdgeHelpers.dataLoopTimer != null) {
+                EdgeHelpers.dataLoopTimer.cancel();
+                EdgeHelpers.dataLoopTimer = null;
             }
             agent.Disconnect();
         } catch (Exception e) {
@@ -139,12 +117,12 @@ class EdgeActions {
 
     static void doSendDataLoop(EdgeAgent agent) {
         try {
-            if (dataLoopTimer != null) {
+            if (EdgeHelpers.dataLoopTimer != null) {
                 return;
             }
-            dataLoopTimer = new Timer();
-            dataLoopTask = new EdgeHelpers.DataLoopTask(agent);
-            dataLoopTimer.schedule(dataLoopTask, 0, sendLoopInterval);
+            EdgeHelpers.dataLoopTimer = new Timer();
+            EdgeHelpers.dataLoopTask = new EdgeHelpers.DataLoopTask(agent);
+            EdgeHelpers.dataLoopTimer.schedule(EdgeHelpers.dataLoopTask, 0, EdgeHelpers.sendLoopInterval);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,7 +135,7 @@ class EdgeActions {
             }
 
             EdgeConfig config = new EdgeConfig();
-            config.Scada = new EdgeConfig.ScadaConfig();
+            config.Node = new EdgeConfig.NodeConfig();
 
             agent.UploadConfig(Const.ActionType.Delete, config);
 
@@ -174,16 +152,16 @@ class EdgeActions {
             }
 
             EdgeConfig config = new EdgeConfig();
-            config.Scada = new EdgeConfig.ScadaConfig();
+            config.Node = new EdgeConfig.NodeConfig();
 
-            config.Scada.DeviceList = new ArrayList<>();
+            config.Node.DeviceList = new ArrayList<>();
 
             for (int i = 1; i <= deviceCount; i++) {
                 EdgeConfig.DeviceConfig device = new EdgeConfig.DeviceConfig();
                 device.Id = "Device" + i;
 
 
-                config.Scada.DeviceList.add(device);
+                config.Node.DeviceList.add(device);
             }
             agent.UploadConfig(Const.ActionType.Delete, config);
         } catch (Exception e) {
@@ -203,9 +181,9 @@ class EdgeActions {
             }
 
             EdgeConfig config = new EdgeConfig();
-            config.Scada = new EdgeConfig.ScadaConfig();
+            config.Node = new EdgeConfig.NodeConfig();
 
-            config.Scada.DeviceList = new ArrayList<>();
+            config.Node.DeviceList = new ArrayList<>();
 
             for (int i = 1; i <= deviceCount; i++) {
                 EdgeConfig.DeviceConfig device = new EdgeConfig.DeviceConfig();
@@ -233,7 +211,7 @@ class EdgeActions {
                     device.TextTagList.add(textTag);
                 }
 
-                config.Scada.DeviceList.add(device);
+                config.Node.DeviceList.add(device);
             }
 
             agent.UploadConfig(Const.ActionType.Delete, config);
@@ -282,13 +260,9 @@ class EdgeActions {
 
 
             EdgeConfig config = new EdgeConfig();
-            config.Scada = new EdgeConfig.ScadaConfig();
+            config.Node = new EdgeConfig.NodeConfig();
 
-            config.Scada.Name = "TEST_SCADA";
-            config.Scada.Description = "For Test";
-
-
-            config.Scada.DeviceList = new ArrayList<>();
+            config.Node.DeviceList = new ArrayList<>();
             for (int i = 1; i <= deviceCount; i++) {
                 EdgeConfig.DeviceConfig device = new EdgeConfig.DeviceConfig();
 
@@ -362,7 +336,7 @@ class EdgeActions {
                     device.TextTagList.add(textTag);
                 }
 
-                config.Scada.DeviceList.add(device);
+                config.Node.DeviceList.add(device);
             }
 
             agent.UploadConfig(Const.ActionType.Update, config);

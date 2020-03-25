@@ -1,4 +1,4 @@
-package wisepaas.scada.scadasdksample;
+package wisepaas.datahub.edgesdksample;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import wisepaas.scada.java.sdk.EdgeAgent;
-import wisepaas.scada.java.sdk.model.edge.EdgeData;
+import wisepaas.datahub.java.sdk.EdgeAgent;
+import wisepaas.datahub.java.sdk.model.edge.EdgeData;
 
 class EdgeHelpers {
     static DataLoopTask dataLoopTask;

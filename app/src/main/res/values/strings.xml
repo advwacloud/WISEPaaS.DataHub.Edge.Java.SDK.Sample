@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">WISE-PaaS/SCADA Simulator</string>
-    <string name="scada_id_lable">SCADA ID</string>
+    <string name="app_name">WISE-PaaS/NODE Simulator</string>
+    <string name="node_id_lable">NODE ID</string>
     <string name="dccs_key">Credential Key</string>
     <string name="api_url">APU Url</string>
     <string name="connected_status">Connected</string>

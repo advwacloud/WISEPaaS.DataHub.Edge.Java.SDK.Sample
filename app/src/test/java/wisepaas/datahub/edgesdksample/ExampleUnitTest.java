@@ -1,4 +1,4 @@
-package wisepaas.scada.scadasdksample;
+package wisepaas.datahub.edgesdksample;
 
 import org.junit.Test;
 

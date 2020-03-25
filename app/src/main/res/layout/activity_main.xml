@@ -154,7 +154,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/scada_id_lable" />
+                        android:text="@string/node_id_lable" />
                 </TableRow>
 
                 <TableRow
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/scadaIdInput"
+                            android:id="@+id/nodeIdInput"
                             android:layout_width="410dp"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
