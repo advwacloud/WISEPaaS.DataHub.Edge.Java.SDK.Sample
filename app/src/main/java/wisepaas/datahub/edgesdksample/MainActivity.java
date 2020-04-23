@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         EdgeAgentOptions options = new EdgeAgentOptions();
+        options.OS = Const.OS.Android;
         options.AndroidPackageName = getPackageName();
         final EdgeAgent _edgeAgent = new EdgeAgent(options, agentListener);
 
